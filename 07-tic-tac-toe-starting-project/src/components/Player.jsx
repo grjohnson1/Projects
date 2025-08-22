@@ -7,10 +7,16 @@ export default function Player({name, symbol}) {
         setIsEditing(!isEditing);
     }
 
+    let playerName = <span className="player-name">{name}</span>;
+
+    if (isEditing) {
+        playerName = <input type="text" required placeholder="enter name" />;
+    }
+
     return (
         <li>
             <span className="player">
-                <span className="player-name">{isEditing ? <input type="text" placeholder="enter name" /> : name}</span>
+                {playerName}
                 <span className="player-symbol">{symbol}</span>
             </span>
             <button onClick={handleEditClick}>{isEditing ? 'Save' : 'Edit'}</button>
