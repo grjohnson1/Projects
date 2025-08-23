@@ -8,7 +8,7 @@ export const CORE_CONCEPTS = [
     image: componentsImg,
     title: 'Components',
     description:
-      '2The core UI building block - compose the user interface by combining multiple components.',
+      'The core UI building block - compose the user interface by combining multiple components.',
   },
   {
     image: jsxImg,
