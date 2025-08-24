@@ -30,31 +30,36 @@ function App() {
   const [userInputs, setUserInputs] = useState(userData);
   const [returnData, setReturnData] = useState([]);
   let totalInterest = 0;
+  let totalAmountInvested = 0;
 
   useEffect(() => {
     const tableData = {
-      initialInvestment: findInputValueById("initialInvestment"),
-      annualInvestment: findInputValueById("annualInvestment"),
-      expectedReturn: findInputValueById("expectedReturn"),
-      duration: findInputValueById("duration")
+      initialInvestment: +findInputValueById("initialInvestment"),
+      annualInvestment: +findInputValueById("annualInvestment"),
+      expectedReturn: +findInputValueById("expectedReturn"),
+      duration: +findInputValueById("duration")
     };
     //console.log(tableData);
     const results = calculateInvestmentResults(tableData);
 
     const updateRows = results.map(rowData => {
-      totalInterest += rowData.interest;
+      totalInterest = 
+        rowData.valueEndOfYear - 
+        rowData.annualInvestment * 
+        rowData.year;
+      totalAmountInvested = rowData.valueEndOfYear - totalInterest;
 
       return {
         ...rowData,
         totalInterest: totalInterest,
-
+        totalAmountInvested: totalAmountInvested
       }
     });
 
     setReturnData(updateRows);
 
 
-    //console.log(returnData);
+    console.log(returnData);
   }, [userInputs]);
 
   function findInputValueById(id) {
@@ -95,15 +100,15 @@ function App() {
         </thead>
         <tbody>
           {
-              returnData.map((rowData, index) => 
-                    <tr key={index}>
-                      <td>{rowData.year}</td>
-                      <td>{formatter.format(rowData.valueEndOfYear)}</td>
-                      <td>{formatter.format(rowData.interest)}</td>
-                      <td>{formatter.format(rowData.totalInterest)}</td>
-                      <td>{formatter.format(rowData.valueEndOfYear - rowData.interest)}</td>
-                    </tr>
-              )
+              returnData.map((rowData) => {
+                <tr key={rowData.year}>
+                  <td>{rowData.year}</td>
+                  <td>{formatter.format(rowData.valueEndOfYear)}</td>
+                  <td>{formatter.format(rowData.interest)}</td>
+                  <td>{formatter.format(rowData.totalInterest)}</td>
+                  <td>{formatter.format(rowData.totalAmountInvested)}</td>
+                </tr>
+              })
             }
         </tbody>
       </table>
