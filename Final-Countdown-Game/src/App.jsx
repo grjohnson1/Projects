@@ -1,3 +1,4 @@
+import Learning from './components/Learning.jsx';
 import Player from './components/Player.jsx';
 
 function App() {
@@ -5,6 +6,7 @@ function App() {
     <>
       <Player />
       <div id="challenges"></div>
+      <Learning />
     </>
   );
 }
