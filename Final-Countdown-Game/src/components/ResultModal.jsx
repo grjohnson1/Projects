@@ -11,8 +11,12 @@ import { useImperativeHandle, useRef } from "react"
  export default ResultModal
 */
 
-export default function ResultModal({ref, result, targetTime}) {
+export default function ResultModal({ref, result, targetTime, remainingTime, onReset}) {
     const dialog = useRef();
+
+    const userLost = remainingTime <= 0;
+    const formattedRemainingTime = (remainingTime / 1000).toFixed(2);
+    const score = Math.round((1 - remainingTime / (targetTime * 1000)) * 100);
 
     // keeps the logic alongside the component allowing user to alter the use of dialog tag to a div and know they should alter the handling
     useImperativeHandle(ref, () => {
@@ -24,10 +28,13 @@ export default function ResultModal({ref, result, targetTime}) {
     });
 
     return <dialog ref={dialog} className="result-modal">
-        <h2>You {result}</h2>
+        {userLost && <h2>You lost</h2>}
+        {!userLost && <h2>You Score: {score}</h2>}
         <p>The targetTime was <strong>{targetTime} seconds.</strong></p>
-        <p>You stopped the timer with <strong>X seconds left.</strong></p>
-        <form method="dialog">
+    const formattedRemainingTime = remainingTime / 1000;
+        <p>You stopped the timer with <strong>{formattedRemainingTime} seconds left.</strong></p>
+        {/* onSubmit will not handle Esc (Escape) key for that you should use onClose */}
+        <form method="dialog" onClose={onReset}>
             <button>Close</button>
         </form>
     </dialog>
