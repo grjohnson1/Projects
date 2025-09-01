@@ -14,6 +14,8 @@ export default function Learning() {
                 <li>Refs on multiple used components can be safer when used on the component.</li>
                 <li>If you need to remember something when state changes Refs is what should be used.</li>
                 <li>Having a form method of dialog will have the default functionality of a Close button without the need of logic/code to close the dialog required.</li>
+                <li>useImperativeHandle allows the connection of a child component to hold functionality related directly to component. Meaning that tied relationships are 
+                    comparmentalized with the component making changes easier to be altered if required.</li>
             </ol>
         </section>
     )
