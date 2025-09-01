@@ -12,7 +12,7 @@ import { createPortal } from 'react-dom';
  export default ResultModal
 */
 
-export default function ResultModal({ref, result, targetTime, remainingTime, onReset}) {
+export default function ResultModal({ref, targetTime, remainingTime, onReset}) {
     const dialog = useRef();
 
     const userLost = remainingTime <= 0;
