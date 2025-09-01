@@ -14,6 +14,7 @@ import { useImperativeHandle, useRef } from "react"
 export default function ResultModal({ref, result, targetTime}) {
     const dialog = useRef();
 
+    // keeps the logic alongside the component allowing user to alter the use of dialog tag to a div and know they should alter the handling
     useImperativeHandle(ref, () => {
         return {
             open() {
