@@ -1,4 +1,5 @@
-import { useImperativeHandle, useRef } from "react"
+import { useImperativeHandle, useRef } from "react";
+import { createPortal } from 'react-dom';
 //import {forwardRef} from 'react';
 /*
  Older versions (befroe React version 19) of react will require a wrapper function to ensure that the ref can be forwarded to the component.
@@ -27,15 +28,18 @@ export default function ResultModal({ref, result, targetTime, remainingTime, onR
         };
     });
 
-    return <dialog ref={dialog} className="result-modal">
-        {userLost && <h2>You lost</h2>}
-        {!userLost && <h2>You Score: {score}</h2>}
-        <p>The targetTime was <strong>{targetTime} seconds.</strong></p>
-    const formattedRemainingTime = remainingTime / 1000;
-        <p>You stopped the timer with <strong>{formattedRemainingTime} seconds left.</strong></p>
-        {/* onSubmit will not handle Esc (Escape) key for that you should use onClose */}
-        <form method="dialog" onClose={onReset}>
-            <button>Close</button>
-        </form>
-    </dialog>
+    return createPortal(
+        <dialog ref={dialog} className="result-modal">
+            {userLost && <h2>You lost</h2>}
+            {!userLost && <h2>You Score: {score}</h2>}
+            <p>The targetTime was <strong>{targetTime} seconds.</strong></p>
+        const formattedRemainingTime = remainingTime / 1000;
+            <p>You stopped the timer with <strong>{formattedRemainingTime} seconds left.</strong></p>
+            {/* onSubmit will not handle Esc (Escape) key for that you should use onClose */}
+            <form method="dialog" onClose={onReset}>
+                <button>Close</button>
+            </form>
+        </dialog>,
+        document.getElementById('modal')
+    );
 }
