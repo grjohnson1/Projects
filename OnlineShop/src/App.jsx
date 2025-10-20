@@ -67,9 +67,14 @@ function App() {
     });
   }
 
+  const ctxValue = {
+    items: shoppingCart.items,
+    addItemToCart: handleAddItemToCart
+  }
+
   return (
     /* older version will require <CartContext.Provider> only newer version will allow for CartContext wrapper by itself */
-    <CartContext value={{items: []}}>
+    <CartContext value={ctxValue}>
       <Header
         cart={shoppingCart}
         onUpdateCartItemQuantity={handleUpdateCartItemQuantity}
