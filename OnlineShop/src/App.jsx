@@ -69,7 +69,7 @@ function App() {
 
   return (
     /* older version will require <CartContext.Provider> only newer version will allow for CartContext wrapper by itself */
-    <CartContext>
+    <CartContext value={{items: []}}>
       <Header
         cart={shoppingCart}
         onUpdateCartItemQuantity={handleUpdateCartItemQuantity}
