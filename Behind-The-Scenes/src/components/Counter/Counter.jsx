@@ -27,10 +27,7 @@ function isPrime(number) {
   return true;
 }
 
-
-// React.memo is used here to avoid unnecessary re-renders of the Counter component
-// when its parent component re-renders but the initialCount prop remains the same.
-const Counter = memo(function Counter({ initialCount }) {
+export default function Counter({ initialCount }) {
   log('<Counter /> rendered', 1);
   const initialCountIsPrime = isPrime(initialCount);
 
@@ -61,6 +58,4 @@ const Counter = memo(function Counter({ initialCount }) {
       </p>
     </section>
   );
-});
-
-export default Counter;
+};
