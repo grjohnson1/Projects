@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { log } from '../../log.js';
 
-export default function ConfigureCounter({ onSetCount }) {
+export default function ConfigureCounter({ onSet }) {
     log('<ConfigureCounter />', 1);
 
     const [enteredNumber, setEnteredNumber] = useState(0);
@@ -12,7 +12,7 @@ export default function ConfigureCounter({ onSetCount }) {
     }
 
     function handleSetClick() {
-        onSetCount(enteredNumber);
+        onSet(enteredNumber);
         setEnteredNumber(0);
     }
     return <section id="configure-counter">
