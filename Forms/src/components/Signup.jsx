@@ -8,6 +8,8 @@ export default function Signup() {
     data.acquisition = acquisitionChannels; // replace single value with array of values for acquisition
     console.log(data);
     // could use something like this: const enteredEmail = fd.get('email');
+
+    event.target.reset(); // resets the entire form
   }
 
   return (

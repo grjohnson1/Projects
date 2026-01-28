@@ -13,7 +13,9 @@ export default function Login() {
     };
     console.log(enteredValues);
 
-    // resettubg refs us discuraged in React
+    // resettubg refs is discuraged in React
+    email.current.value = '';
+    password.current.value = '';
   }
   
   return (
