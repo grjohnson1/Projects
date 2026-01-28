@@ -19,7 +19,7 @@ function App() {
   const {
     isFetching,
     error,
-    fetchedData:userPlaces,/*alias created*/
+    fetchedData: userPlaces,/*alias created*/
     setFetchedData: setUserPlaces
   } = useFetch(fetchUserPlaces, []);
 
