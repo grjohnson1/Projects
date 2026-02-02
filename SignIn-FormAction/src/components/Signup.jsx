@@ -1,7 +1,41 @@
+import { isEmail, isNotEmpty, isEqualToOtherValue, hasMinLength} from "../util/validation";
+
 export default function Signup() {
   function signupAction(formData) {
-    const enteredEmail = formData.get("email");
-    console.log("Email submitted: ", enteredEmail);
+    const email = formData.get("email");
+    const password = formData.get("password");
+    const confirmPassword = formData.get("confirm-password");
+    const firstName = formData.get("first-name");
+    const lastName = formData.get("last-name");
+    const role = formData.get("role");
+    const terms = formData.get("terms") === "on";
+    const acquisitions = formData.getAll("acquisition");
+
+    let errors = [];
+    if (!isEmail(email)) {
+      errors.push("Please enter a valid email address.");
+    }
+    if (!isNotEmpty(password) || !hasMinLength(password, 8)) {
+      errors.push("Password must be at least 8 characters long.");
+    }
+    if (!isEqualToOtherValue(password, confirmPassword)) {
+      errors.push("Passwords do not match.");
+    }
+    if (!isNotEmpty(firstName) || !isNotEmpty(lastName)) {
+      errors.push("Please provide both your first and last name.");
+    }
+    if (!isNotEmpty(role)) {
+      errors.push("Please select a role.");
+    }
+    if (!terms) {
+      errors.push("You must accept the terms and conditions.");
+    }
+    if (acquisitions.length === 0) {
+      errors.push("Please let us know how you found us.");
+    }
+    if (errors.length > 0) {
+      return { success: false, errors };
+    }
   }
   
   return (
