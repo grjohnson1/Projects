@@ -5,10 +5,10 @@ import Button from "./UI/Button";
 import CartContext from "../Store/CartContext";
 
 export default function MealItem({ meal }) {
-    const cartContext = useContext(CartContext);
+    const cartCtx = useContext(CartContext);
 
     function handleAddMealToCart() {
-        cartContext.addItem(meal);
+        cartCtx.addItem(meal);
     }
 
     return <li className="meal-item">
