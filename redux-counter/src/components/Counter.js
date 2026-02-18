@@ -1,4 +1,6 @@
+//import { Component } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+//import { useSelector, useDispatch, connect } from 'react-redux';
 import classes from './Counter.module.css';
 
 const Counter = () => {
@@ -13,19 +15,72 @@ const Counter = () => {
     dispatch({ type: 'decrement' });
   };
 
-  const toggleCounterHandler = () => {};
+   const toggleCounterHandler = () => {};
 
   return (
-    <main className={classes.counter}>
-      <h1>Redux Counter</h1>
-      <div className={classes.value}>{counter}</div>
-      <div>
-        <button onClick={incrementHandler}>Increment</button>
-        <button onClick={decrementHandler}>Decrement</button>
-      </div>
-      <button onClick={toggleCounterHandler}>Toggle Counter</button>
-    </main>
-  );
+      <main className={classes.counter}>
+        <h1>Redux Counter</h1>
+        <div className={classes.value}>{counter}</div>
+        <div>
+          <button onClick={incrementHandler}>Increment</button>
+          <button onClick={decrementHandler}>Decrement</button>
+        </div>
+        <button onClick={toggleCounterHandler}>Toggle Counter</button>
+      </main>
+    );
+
 };
 
 export default Counter;
+
+/*
+class Counter extends Component {
+  incrementHandler() {
+    this.props.increment();
+  }
+
+  decrementHandler() {
+    this.props.decrement();
+  }
+
+  toggleCounterHandler() {
+
+  }
+
+  render() {
+    return (
+      <main className={classes.counter}>
+        <h1>Redux Counter</h1>
+        <div className={classes.value}>{this.props.counter}</div>
+        <div>
+          <button onClick={this.incrementHandler.bind(this)}>Increment</button>
+          <button onClick={this.decrementHandler.bind(this)}>Decrement</button>
+        </div>
+        <button onClick={this.toggleCounterHandler}>Toggle Counter</button>
+      </main>
+    );
+  }
+}
+
+
+const mapStateToProps = state => {
+  return {
+    counter: state.counter
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    increment: () => dispatch({ type: 'increment' }),
+    decrement: () => dispatch({ type: 'decrement' })
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);
+// higher order function that connects the component to the store, it 
+// returns a new component that is connected to the store, it takes two arguments, 
+// the first one is a function that maps the state to props, the second one is a 
+// function that maps the dispatch to props, in this case we don't need to map 
+// the state to props because we are using the useSelector hook, and we don't 
+// need to map the dispatch to props because we are using the useDispatch hook
+*/
